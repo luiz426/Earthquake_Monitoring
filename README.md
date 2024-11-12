@@ -46,8 +46,6 @@ earthquake-monitoring/
 - Minimum 2 CPUs
 - Minimum 10GB disk space
 
-## Database Structure
-
 ##  How to Run
 
 1. Clone the repository:
@@ -70,6 +68,8 @@ docker-compose up -d
 4. Access the interfaces:
    - Airflow: http://localhost:8080 (username/password: airflow/airflow)
    - pgAdmin: http://localhost:8081 (email: felipegf600@gmail.com, password: airflow)
+
+## Database Structure
 
 ### Table: earthquakes
 - id: Unique earthquake identifier
@@ -109,5 +109,3 @@ The system generates automatic statistics including:
 - 2-second delay implemented between API calls
 - Fallback system for coordinates when geocoding fails
 - Optimized indexes for frequent queries
-
-Let me know if you need any clarification or have specific sections you'd like me to expand upon!
