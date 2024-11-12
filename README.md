@@ -48,6 +48,29 @@ earthquake-monitoring/
 
 ## Database Structure
 
+##  How to Run
+
+1. Clone the repository:
+```bash
+git clone [YOUR_REPOSITORY_URL]
+cd earthquake-monitoring
+```
+
+2. Set up environment variables:
+```bash
+echo "AIRFLOW_UID=$(id -u)" > .env
+echo "OPENCAGE_API_KEY=your_api_key" >> .env
+```
+
+3. Start the services:
+```bash
+docker-compose up -d
+```
+
+4. Access the interfaces:
+   - Airflow: http://localhost:8080 (username/password: airflow/airflow)
+   - pgAdmin: http://localhost:8081 (email: felipegf600@gmail.com, password: airflow)
+
 ### Table: earthquakes
 - id: Unique earthquake identifier
 - time: Event date and time
