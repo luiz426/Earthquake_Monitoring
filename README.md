@@ -1,89 +1,90 @@
- Sistema de Monitoramento de Terremotos em Tempo Real
+# Real-Time Earthquake Monitoring System
 
-Um sistema automatizado de coleta e análise de dados sísmicos utilizando Apache Airflow, Docker e PostgreSQL. O projeto coleta dados da API USGS (United States Geological Survey) e enriquece as informações com dados geográficos detalhados usando a API OpenCage.
+An automated system for collecting and analyzing seismic data using Apache Airflow, Docker, and PostgreSQL. The project collects data from the USGS (United States Geological Survey) API and enriches the information with detailed geographic data using the OpenCage API.
 
-Sobre o Projeto
+## About the Project
 
-Este sistema realiza o monitoramento contínuo de atividades sísmicas globais, coletando dados a cada 10 minutos e armazenando-os em um banco de dados PostgreSQL. O projeto utiliza Docker para containerização, garantindo consistência entre ambientes de desenvolvimento e produção.
+This system performs continuous monitoring of global seismic activities, collecting data every 10 minutes and storing it in a PostgreSQL database. The project uses Docker for containerization, ensuring consistency between development and production environments.
 
-Funcionalidades
+## Features
 
-Coleta automática de dados sísmicos da API USGS
-Atualização a cada 10 minutos
-Enriquecimento de dados com informações geográficas detalhadas (cidade, estado, país)
-Rastreamento de alterações nos dados dos terremotos
-Interface web para visualização dos dados (via pgAdmin)
-Sistema de logging para monitoramento de estatísticas
+- Automatic collection of seismic data from USGS API
+- Updates every 10 minutes
+- Data enrichment with detailed geographic information (city, state, country)
+- Tracking of changes in earthquake data
+- Web interface for data visualization (via pgAdmin)
+- Logging system for statistics monitoring
 
-Tecnologias Utilizadas
+## Technologies Used
 
-Python 3.x
-Apache Airflow 2.10.2
-PostgreSQL 16
-Docker e Docker Compose
-pgAdmin 4
-Redis 7.2
-OpenCage Geocoding API
-USGS Earthquake API
+- Python 3.x
+- Apache Airflow 2.10.2
+- PostgreSQL 16
+- Docker and Docker Compose
+- pgAdmin 4
+- Redis 7.2
+- OpenCage Geocoding API
+- USGS Earthquake API
 
- Estrutura do Projeto
+## Project Structure
 
-Copyearthquake-monitoring/
-dags/
-earthquake_monitoring.py    
-docker-compose.yml             
-logs/                         
-plugins/                      
-README.md
+```
+earthquake-monitoring/
+├── dags/
+│   └── earthquake_monitoring.py    # Main DAG
+├── docker-compose.yml             # Docker configuration
+├── logs/                         # Airflow logs
+├── plugins/                      # Airflow plugins
+└── README.md
+```
 
-Requisitos
+## Requirements
 
-Docker e Docker Compose instalados
-Chave de API do OpenCage (gratuita)
-Mínimo de 4GB de RAM
-Mínimo de 2 CPUs
-Mínimo de 10GB de espaço em disco
+- Docker and Docker Compose installed
+- OpenCage API key (free)
+- Minimum 4GB RAM
+- Minimum 2 CPUs
+- Minimum 10GB disk space
 
-Estrutura do Banco de Dados
+## Database Structure
 
-Tabela: earthquakes
+### Table: earthquakes
+- id: Unique earthquake identifier
+- time: Event date and time
+- latitude/longitude: Coordinates
+- depth: Depth
+- magnitude: Earthquake magnitude
+- place: Descriptive location
+- type: Event type
+- alert: Alert level
+- tsunami: Tsunami risk indicator
+- Enriched geographic data (city, state, country)
 
-id: Identificador único do terremoto
-time: Data e hora do evento
-latitude/longitude: Coordenadas
-depth: Profundidade
-magnitude: Magnitude do terremoto
-place: Localização descritiva
-type: Tipo do evento
-alert: Nível de alerta
-tsunami: Indicador de risco de tsunami
-Dados geográficos enriquecidos (cidade, estado, país)
+### Table: earthquake_updates
+- Tracking of data changes
+- Update history per event
 
-Tabela: earthquake_updates
+## Data Pipeline
 
-Rastreamento de alterações nos dados
-Histórico de atualizações por evento
+1. Collection: Data obtained from USGS API every 10 minutes
+2. Enrichment: Geographic data added via OpenCage API
+3. Processing: Verification of updates and new events
+4. Storage: Persistence in PostgreSQL
+5. Monitoring: Statistics and event logs
 
-Pipeline de Dados
+## Monitoring
 
-Coleta: Dados obtidos da API USGS a cada 10 minutos
-Enriquecimento: Dados geográficos adicionados via OpenCage API
-Processamento: Verificação de atualizações e novos eventos
-Armazenamento: Persistência no PostgreSQL
-Monitoramento: Estatísticas e logs de eventos
+The system generates automatic statistics including:
+- Event count by country
+- Average magnitudes by region
+- Updates to existing data
+- Pipeline performance
 
-Monitoramento
+## Important Notes
 
-O sistema gera estatísticas automáticas incluindo:
+- OpenCage API has request limits
+- 2-second delay implemented between API calls
+- Fallback system for coordinates when geocoding fails
+- Optimized indexes for frequent queries
 
-Contagem de eventos por país
-Magnitudes médias por região
-Atualizações de dados existentes
-Performance da pipeline
-
-Observações Importantes
-
-A API do OpenCage tem limite de requisições
-Implementado delay de 2 segundos entre chamadas à API
-Sistema de fallback para coordenadas quando geocodificação falha
-Índices otimizados para consultas frequentes
+Let me know if you need any clarification or have specific sections you'd like me to expand upon!
